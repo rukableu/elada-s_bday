@@ -12,15 +12,13 @@
             box-sizing: border-box;
         }
 
-         body {
-        font-family: 'Poppins', sans-serif;
-        background-image: url(https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Happy%20birthday-3RdsxiQr2A7n61GtItKTdQEdDjsgsb.jpeg); 
-        background-size: cover;
-        background-position: center;
-        min-height: 100vh;
-        overflow: hidden;
-        color: #333;
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffcce6, #ffb3d9, #ff99cc);
+            min-height: 100vh;
+            overflow: hidden;
+            color: #333;
+        }
 
         /* Loading Screen */
         #loading-screen {
@@ -97,8 +95,6 @@
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             animation: fadeIn 1s ease-out;
-            position: relative;
-            z-index: 10;
         }
 
         .birthday-title {
@@ -206,32 +202,6 @@
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* Party Hat */
-        .party-hat {
-            position: absolute;
-            top: -60px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 80px;
-            background: linear-gradient(135deg, #ff66b2, #9966ff);
-            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
-            z-index: 5;
-            display: none;
-        }
-
-        .party-hat::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 10px;
-            height: 10px;
-            background-color: #ffff00;
-            border-radius: 50%;
-        }
-
         /* Buttons */
         .celebration-btn {
             background-color: #ff66b2;
@@ -317,27 +287,6 @@
             opacity: 0.8;
         }
 
-        /* Streamers */
-        .streamer {
-            position: absolute;
-            width: 5px;
-            height: 100px;
-            top: -100px;
-            transform-origin: top center;
-            animation: swing 5s ease-in-out infinite, fall 10s linear forwards;
-        }
-
-        /* Background Confetti */
-        .bg-confetti-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -347,13 +296,6 @@
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
-        }
-
-        @keyframes colorChange {
-            0% { color: #ff3399; }
-            33% { color: #ff66b2; }
-            66% { color: #ff99cc; }
-            100% { color: #ff3399; }
         }
 
         @keyframes flicker {
@@ -372,17 +314,6 @@
         @keyframes confettiFall {
             0% { transform: translateY(0) rotate(0); opacity: 1; }
             100% { transform: translateY(1000px) rotate(360deg); opacity: 0; }
-        }
-
-        @keyframes swing {
-            0% { transform: rotate(5deg); }
-            50% { transform: rotate(-5deg); }
-            100% { transform: rotate(5deg); }
-        }
-
-        @keyframes fall {
-            0% { top: -100px; }
-            100% { top: 100vh; opacity: 0; }
         }
 
         /* Responsive Design */
@@ -438,9 +369,6 @@
         </div>
     </div>
 
-    <!-- Background Confetti -->
-    <div class="bg-confetti-container"></div>
-
     <!-- Main Celebration -->
     <div id="celebration" class="hidden">
         <div class="music-control">
@@ -461,7 +389,6 @@
                     <div class="candle">
                         <div class="flame"></div>
                     </div>
-                    <div class="party-hat"></div>
                 </div>
                 <div class="cake-stand"></div>
             </div>
@@ -470,25 +397,15 @@
             
             <button id="confetti-btn" class="celebration-btn">Make a Wish!</button>
             <button id="balloon-btn" class="celebration-btn">Release Balloons!</button>
-            <button id="party-mode-btn" class="celebration-btn">Party Mode!</button>
         </div>
 
         <div class="balloons-container"></div>
         <div id="confetti-container"></div>
-        <div id="streamers-container"></div>
     </div>
 
-   <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" 
-    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1559652028&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
-</iframe>
-<div style="font-size: 10px; color: #cccccc; line-break: anywhere; word-break: normal; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Garuda, Verdana, Tahoma, sans-serif; font-weight: 100;">
-    <a href="https://soundcloud.com/abyng" title="scar ☆" target="_blank" style="color: #cccccc; text-decoration: none;">scar ☆</a> · 
-    <a href="https://soundcloud.com/abyng/pink-maggit-deftones-nightcore" title="pink maggit- deftones *nightcore*" target="_blank" style="color: #cccccc; text-decoration: none;">pink maggit- deftones *nightcore*</a>
-</div>
-
-
-
-
+    <audio id="birthday-music" loop>
+        <source src="birthday-music.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -501,14 +418,8 @@
             const musicToggle = document.getElementById('music-toggle');
             const confettiBtn = document.getElementById('confetti-btn');
             const balloonBtn = document.getElementById('balloon-btn');
-            const partyModeBtn = document.getElementById('party-mode-btn');
             const balloonsContainer = document.querySelector('.balloons-container');
             const confettiContainer = document.getElementById('confetti-container');
-            const streamersContainer = document.getElementById('streamers-container');
-            const bgConfettiContainer = document.querySelector('.bg-confetti-container');
-            
-            // Create background confetti
-            createBackgroundConfetti(100);
             
             // Simulate loading progress
             let progress = 0;
@@ -543,7 +454,6 @@
                 
                 // Add initial animations
                 createBalloons(5);
-                createStreamers(10);
                 setTimeout(() => createConfetti(50), 1000);
             }
             
@@ -560,7 +470,7 @@
             
             // Confetti button
             confettiBtn.addEventListener('click', () => {
-                createConfetti(150);
+                createConfetti(100);
                 
                 // Make the cake candle flicker more intensely
                 const flame = document.querySelector('.flame');
@@ -573,37 +483,12 @@
             
             // Balloon button
             balloonBtn.addEventListener('click', () => {
-                createBalloons(15);
-            });
-            
-            // Party mode button
-            partyModeBtn.addEventListener('click', () => {
-                createConfetti(200);
-                createBalloons(20);
-                createStreamers(15);
-                
-                // Show party hat
-                document.querySelector('.party-hat').style.display = 'block';
-                
-                // Change background
-                document.body.style.animation = 'colorChange 5s infinite';
-                
-                // More intense animations
-                const birthdayTitle = document.querySelector('.birthday-title');
-                birthdayTitle.style.animation = 'bounce 1s infinite';
-                
-                // Play music if it's not already playing
-                if (birthdayMusic.paused) {
-                    birthdayMusic.play();
-                    musicToggle.querySelector('.music-icon').textContent = '🔊';
-                }
+                createBalloons(10);
             });
             
             // Create balloons function
             function createBalloons(count) {
-                const colors = ['#ff66b2', '#ff99cc', '#ffb3d9', '#ffcce6', '#ff3399', 
-                               '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff', 
-                               '#ff00ff', '#ff9900', '#9900ff'];
+                const colors = ['#ff66b2', '#ff99cc', '#ffb3d9', '#ffcce6', '#ff3399'];
                 
                 for (let i = 0; i < count; i++) {
                     const balloon = document.createElement('div');
@@ -642,9 +527,7 @@
             // Create confetti function
             function createConfetti(count) {
                 const colors = ['#ff66b2', '#ff99cc', '#ffb3d9', '#ffcce6', '#ff3399', 
-                                '#ffff99', '#99ff99', '#99ccff', '#cc99ff',
-                                '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff',
-                                '#ff00ff', '#ff9900', '#9900ff', '#009900', '#990000'];
+                                '#ffff99', '#99ff99', '#99ccff', '#cc99ff'];
                 
                 for (let i = 0; i < count; i++) {
                     const confetti = document.createElement('div');
@@ -660,12 +543,12 @@
                     confetti.style.backgroundColor = colors[colorIndex];
                     
                     // Random size
-                    const size = 5 + Math.random() * 15;
+                    const size = 5 + Math.random() * 10;
                     confetti.style.width = `${size}px`;
                     confetti.style.height = `${size}px`;
                     
                     // Random shape
-                    const shapes = ['', '50%', '0%', '50% 0 50% 50%'];
+                    const shapes = ['', '50%'];
                     const shapeIndex = Math.floor(Math.random() * shapes.length);
                     confetti.style.borderRadius = shapes[shapeIndex];
                     
@@ -686,95 +569,6 @@
                 }
             }
             
-            // Create streamers function
-            function createStreamers(count) {
-                const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff',
-                               '#ff00ff', '#ff9900', '#9900ff', '#ff66b2', '#ff3399'];
-                
-                for (let i = 0; i < count; i++) {
-                    const streamer = document.createElement('div');
-                    streamer.className = 'streamer';
-                    
-                    // Random position
-                    const left = Math.random() * 100;
-                    streamer.style.left = `${left}%`;
-                    
-                    // Random color
-                    const colorIndex = Math.floor(Math.random() * colors.length);
-                    streamer.style.backgroundColor = colors[colorIndex];
-                    
-                    // Random length
-                    const length = 100 + Math.random() * 200;
-                    streamer.style.height = `${length}px`;
-                    
-                    // Random width
-                    const width = 3 + Math.random() * 5;
-                    streamer.style.width = `${width}px`;
-                    
-                    // Random rotation
-                    const rotation = -30 + Math.random() * 60;
-                    streamer.style.transform = `rotate(${rotation}deg)`;
-                    
-                    // Random animation duration
-                    const duration = 5 + Math.random() * 10;
-                    const fallDuration = 8 + Math.random() * 7;
-                    streamer.style.animation = `swing ${duration}s ease-in-out infinite, fall ${fallDuration}s linear forwards`;
-                    
-                    // Random delay
-                    const delay = Math.random() * 5;
-                    streamer.style.animationDelay = `0s, ${delay}s`;
-                    
-                    streamersContainer.appendChild(streamer);
-                    
-                    // Remove streamer after animation completes
-                    setTimeout(() => {
-                        streamer.remove();
-                    }, fallDuration * 1000 + delay * 1000);
-                }
-            }
-            
-            // Create background confetti
-            function createBackgroundConfetti(count) {
-                const colors = ['#ff66b2', '#ff99cc', '#ffb3d9', '#ffcce6', '#ff3399', 
-                                '#ffff99', '#99ff99', '#99ccff', '#cc99ff',
-                                '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff',
-                                '#ff00ff', '#ff9900', '#9900ff', '#009900', '#990000'];
-                
-                for (let i = 0; i < count; i++) {
-                    const confetti = document.createElement('div');
-                    confetti.className = 'confetti';
-                    
-                    // Random position
-                    const left = Math.random() * 100;
-                    const top = Math.random() * 100;
-                    confetti.style.left = `${left}%`;
-                    confetti.style.top = `${top}%`;
-                    
-                    // Random color
-                    const colorIndex = Math.floor(Math.random() * colors.length);
-                    confetti.style.backgroundColor = colors[colorIndex];
-                    
-                    // Random size
-                    const size = 5 + Math.random() * 10;
-                    confetti.style.width = `${size}px`;
-                    confetti.style.height = `${size}px`;
-                    
-                    // Random shape
-                    const shapes = ['', '50%', '0%', '50% 0 50% 50%'];
-                    const shapeIndex = Math.floor(Math.random() * shapes.length);
-                    confetti.style.borderRadius = shapes[shapeIndex];
-                    
-                    // Random rotation
-                    const rotation = Math.random() * 360;
-                    confetti.style.transform = `rotate(${rotation}deg)`;
-                    
-                    // Fixed position
-                    confetti.style.position = 'absolute';
-                    
-                    bgConfettiContainer.appendChild(confetti);
-                }
-            }
-            
             // Make cake interactive
             const cake = document.querySelector('.cake');
             cake.addEventListener('click', () => {
@@ -788,4 +582,3 @@
     </script>
 </body>
 </html>
-
