@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Elada!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600;700&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,8 +16,9 @@
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #ffcce6, #ffb3d9, #ff99cc);
             min-height: 100vh;
-            overflow: hidden;
+            overflow-x: hidden;
             color: #333;
+            position: relative;
         }
 
         /* Loading Screen */
@@ -41,6 +42,7 @@
             color: #ff66b2;
             text-align: center;
             font-size: 1.8rem;
+            font-family: 'Comic Neue', cursive;
         }
 
         .loading-container {
@@ -69,6 +71,121 @@
             margin-top: 10px;
             font-weight: bold;
             color: #ff66b2;
+            font-family: 'Comic Neue', cursive;
+        }
+
+        .loading-emoji {
+            font-size: 2rem;
+            margin-top: 20px;
+            animation: bounce 1s infinite alternate;
+        }
+
+        /* Login Screen */
+        #login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 900;
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+        }
+
+        .login-container {
+            max-width: 500px;
+            width: 90%;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .login-image:hover {
+            transform: scale(1.02);
+        }
+
+        .login-title {
+            font-family: 'Comic Neue', cursive;
+            font-size: 2rem;
+            color: #ff66b2;
+            margin-bottom: 15px;
+        }
+
+        .login-subtitle {
+            font-family: 'Comic Neue', cursive;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .login-button {
+            background-color: #ff66b2;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-family: 'Comic Neue', cursive;
+        }
+
+        .login-button:hover {
+            background-color: #ff3399;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+        .login-doodle {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.5;
+        }
+
+        .doodle-1 {
+            top: 10px;
+            left: 10px;
+            transform: rotate(-15deg);
+        }
+
+        .doodle-2 {
+            bottom: 10px;
+            right: 10px;
+            transform: rotate(15deg);
+        }
+
+        .doodle-3 {
+            top: 10px;
+            right: 10px;
+            transform: rotate(15deg);
+        }
+
+        .doodle-4 {
+            bottom: 10px;
+            left: 10px;
+            transform: rotate(-15deg);
         }
 
         /* Main Celebration */
@@ -76,14 +193,20 @@
             display: none !important;
         }
 
+        .slide-up {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
         #celebration {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             min-height: 100vh;
             padding: 20px;
             position: relative;
+            overflow-x: hidden;
         }
 
         .birthday-container {
@@ -95,6 +218,9 @@
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             animation: fadeIn 1s ease-out;
+            position: relative;
+            z-index: 10;
+            margin-top: 50px;
         }
 
         .birthday-title {
@@ -103,6 +229,7 @@
             color: #ff66b2;
             margin-bottom: 10px;
             animation: bounce 2s infinite;
+            text-shadow: 3px 3px 0px rgba(255, 102, 178, 0.3);
         }
 
         .birthday-name {
@@ -111,12 +238,14 @@
             color: #ff3399;
             margin-bottom: 30px;
             animation: colorChange 3s infinite;
+            text-shadow: 3px 3px 0px rgba(255, 51, 153, 0.3);
         }
 
         .birthday-message {
             font-size: 1.2rem;
             margin: 30px 0;
             line-height: 1.6;
+            font-family: 'Comic Neue', cursive;
         }
 
         /* Cake Styles */
@@ -131,6 +260,12 @@
             width: 180px;
             height: 140px;
             margin: 0 auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .cake:hover {
+            transform: scale(1.05);
         }
 
         .cake-bottom {
@@ -202,6 +337,32 @@
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         }
 
+        /* Party Hat */
+        .party-hat {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff66b2, #9966ff);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            z-index: 5;
+            display: none;
+        }
+
+        .party-hat::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background-color: #ffff00;
+            border-radius: 50%;
+        }
+
         /* Buttons */
         .celebration-btn {
             background-color: #ff66b2;
@@ -215,6 +376,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-family: 'Comic Neue', cursive;
         }
 
         .celebration-btn:hover {
@@ -287,6 +449,170 @@
             opacity: 0.8;
         }
 
+        /* Streamers */
+        .streamer {
+            position: absolute;
+            width: 5px;
+            height: 100px;
+            top: -100px;
+            transform-origin: top center;
+            animation: swing 5s ease-in-out infinite, fall 10s linear forwards;
+        }
+
+        /* Background Confetti */
+        .bg-confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Featured Images */
+        .featured-image-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .featured-image-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .featured-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .featured-image:hover {
+            transform: scale(1.03);
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 70%, rgba(255,102,178,0.7) 100%);
+            pointer-events: none;
+        }
+
+        .image-caption {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            font-family: 'Comic Neue', cursive;
+        }
+
+        /* Vercel Login Image */
+        .vercel-login-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 30px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .vercel-login-container:hover {
+            transform: translateY(-8px) rotate(2deg);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .vercel-login-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .vercel-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(255,102,178,0.8) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-bottom: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .vercel-login-container:hover .vercel-overlay {
+            opacity: 1;
+        }
+
+        .vercel-caption {
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+            font-family: 'Comic Neue', cursive;
+        }
+
+        .party-elements-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .party-element {
+            position: absolute;
+            font-size: 2rem;
+            animation: bounce 2s infinite alternate;
+        }
+
+        .party-hat-emoji {
+            top: 10px;
+            left: 20px;
+            transform: rotate(-15deg);
+        }
+
+        .cake-emoji {
+            bottom: 20px;
+            right: 20px;
+            transform: rotate(15deg);
+        }
+
+        .gift-emoji {
+            bottom: 20px;
+            left: 20px;
+            transform: rotate(-10deg);
+        }
+
+        .balloon-emoji {
+            top: 10px;
+            right: 20px;
+            transform: rotate(10deg);
+        }
+
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -296,6 +622,13 @@
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
+        }
+
+        @keyframes colorChange {
+            0% { color: #ff3399; }
+            33% { color: #ff66b2; }
+            66% { color: #ff99cc; }
+            100% { color: #ff3399; }
         }
 
         @keyframes flicker {
@@ -316,6 +649,22 @@
             100% { transform: translateY(1000px) rotate(360deg); opacity: 0; }
         }
 
+        @keyframes swing {
+            0% { transform: rotate(5deg); }
+            50% { transform: rotate(-5deg); }
+            100% { transform: rotate(5deg); }
+        }
+
+        @keyframes fall {
+            0% { top: -100px; }
+            100% { top: 100vh; opacity: 0; }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .birthday-title {
@@ -333,6 +682,15 @@
             
             .birthday-container {
                 padding: 20px;
+            }
+            
+            .featured-image-container,
+            .vercel-login-container {
+                max-width: 400px;
+            }
+
+            .login-title {
+                font-size: 1.8rem;
             }
         }
 
@@ -354,6 +712,19 @@
                 padding: 10px 20px;
                 font-size: 0.9rem;
             }
+            
+            .featured-image-container,
+            .vercel-login-container {
+                max-width: 300px;
+            }
+
+            .login-title {
+                font-size: 1.5rem;
+            }
+
+            .login-subtitle {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -367,7 +738,28 @@
             </div>
             <div class="loading-text">0%</div>
         </div>
+        <div class="loading-emoji">🎂</div>
     </div>
+
+    <!-- Login Screen -->
+    <div id="login-screen">
+        <div class="login-container">
+            <div class="login-doodle doodle-1">🎉</div>
+            <div class="login-doodle doodle-2">🎁</div>
+            <div class="login-doodle doodle-3">🎈</div>
+            <div class="login-doodle doodle-4">🎊</div>
+            
+            <h2 class="login-title">Access Elada's Birthday Party</h2>
+              <img src="https://i.pinimg.com/736x/03/07/6e/03076e1318f9b8eedc8733509f469e86.jpg" alt="Vercel Login" class="vercel-login-image">
+            <h2 class="login-title">Are you Elada? If not kindly leave :D</h2>
+            <button id="login-button" class="login-button">Yuhuh 🎉</button>
+        </div>
+    </div>
+        </div>
+    </div>
+
+    <!-- Background Confetti -->
+    <div class="bg-confetti-container"></div>
 
     <!-- Main Celebration -->
     <div id="celebration" class="hidden">
@@ -381,6 +773,14 @@
             <h1 class="birthday-title">Happy Birthday</h1>
             <h2 class="birthday-name">Elada!</h2>
             
+            <!-- Featured Image -->
+            <div class="featured-image-container">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Happy%20birthday-3RdsxiQr2A7n61GtItKTdQEdDjsgsb.jpeg" alt="Birthday Celebration" class="featured-image">
+                <div class="image-overlay"></div>
+                <div class="image-caption">Ready for duty... and cake! 🎂</div>
+            </div>
+            
+            
             <div class="cake-container">
                 <div class="cake">
                     <div class="cake-top"></div>
@@ -389,18 +789,21 @@
                     <div class="candle">
                         <div class="flame"></div>
                     </div>
+                    <div class="party-hat"></div>
                 </div>
                 <div class="cake-stand"></div>
             </div>
 
-            <p class="birthday-message">Wishing you a day filled with happiness and a year filled with joy!</p>
+            <p class="birthday-message"><B>Keep living for as long as you want!!! 🎉</p>
             
-            <button id="confetti-btn" class="celebration-btn">Make a Wish!</button>
-            <button id="balloon-btn" class="celebration-btn">Release Balloons!</button>
+            <button id="confetti-btn" class="celebration-btn">Make a Wish! 🎂</button>
+            <button id="balloon-btn" class="celebration-btn">Release Balloons! 🎈</button>
+            <button id="party-mode-btn" class="celebration-btn">Party Mode! 🥳</button>
         </div>
 
         <div class="balloons-container"></div>
         <div id="confetti-container"></div>
+        <div id="streamers-container"></div>
     </div>
 
     <audio id="birthday-music" loop>
@@ -411,20 +814,42 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Loading screen functionality
             const loadingScreen = document.getElementById('loading-screen');
+            const loginScreen = document.getElementById('login-screen');
             const celebration = document.getElementById('celebration');
             const loadingProgress = document.querySelector('.loading-progress');
             const loadingText = document.querySelector('.loading-text');
+            const loadingEmoji = document.querySelector('.loading-emoji');
+            const loginButton = document.getElementById('login-button');
             const birthdayMusic = document.getElementById('birthday-music');
             const musicToggle = document.getElementById('music-toggle');
             const confettiBtn = document.getElementById('confetti-btn');
             const balloonBtn = document.getElementById('balloon-btn');
+            const partyModeBtn = document.getElementById('party-mode-btn');
+            const vercelPartyBtn = document.getElementById('vercel-party-btn');
             const balloonsContainer = document.querySelector('.balloons-container');
             const confettiContainer = document.getElementById('confetti-container');
+            const streamersContainer = document.getElementById('streamers-container');
+            const bgConfettiContainer = document.querySelector('.bg-confetti-container');
+            const featuredImage = document.querySelector('.featured-image');
+            const vercelLoginContainer = document.querySelector('.vercel-login-container');
+            const vercelLoginImage = document.querySelector('.vercel-login-image');
+            
+            // Loading emojis animation
+            const emojis = ['🎂', '🎉', '🎈', '🎁', '🥳', '🎊'];
+            let emojiIndex = 0;
+            
+            const emojiInterval = setInterval(() => {
+                emojiIndex = (emojiIndex + 1) % emojis.length;
+                loadingEmoji.textContent = emojis[emojiIndex];
+            }, 500);
+            
+            // Create background confetti
+            createBackgroundConfetti(100);
             
             // Simulate loading progress
             let progress = 0;
             const loadingInterval = setInterval(() => {
-                progress += Math.random() * 10;
+                progress += Math.random() * 8;
                 if (progress > 100) progress = 100;
                 
                 loadingProgress.style.width = `${progress}%`;
@@ -432,16 +857,27 @@
                 
                 if (progress === 100) {
                     clearInterval(loadingInterval);
+                    clearInterval(emojiInterval);
+                    
                     setTimeout(() => {
                         loadingScreen.style.opacity = '0';
                         setTimeout(() => {
                             loadingScreen.classList.add('hidden');
-                            celebration.classList.remove('hidden');
-                            startCelebration();
+                            loginScreen.classList.remove('hidden');
                         }, 500);
-                    }, 500);
+                    }, 800);
                 }
             }, 200);
+            
+            // Login button
+            loginButton.addEventListener('click', () => {
+                loginScreen.classList.add('slide-up');
+                setTimeout(() => {
+                    loginScreen.classList.add('hidden');
+                    celebration.classList.remove('hidden');
+                    startCelebration();
+                }, 500);
+            });
             
             // Start celebration
             function startCelebration() {
@@ -454,6 +890,7 @@
                 
                 // Add initial animations
                 createBalloons(5);
+                createStreamers(10);
                 setTimeout(() => createConfetti(50), 1000);
             }
             
@@ -470,7 +907,7 @@
             
             // Confetti button
             confettiBtn.addEventListener('click', () => {
-                createConfetti(100);
+                createConfetti(150);
                 
                 // Make the cake candle flicker more intensely
                 const flame = document.querySelector('.flame');
@@ -483,12 +920,140 @@
             
             // Balloon button
             balloonBtn.addEventListener('click', () => {
-                createBalloons(10);
+                createBalloons(15);
             });
+            
+            // Party mode button
+            partyModeBtn.addEventListener('click', () => {
+                createConfetti(200);
+                createBalloons(20);
+                createStreamers(15);
+                
+                // Show party hat
+                document.querySelector('.party-hat').style.display = 'block';
+                
+                // Change background
+                document.body.style.animation = 'colorChange 5s infinite';
+                
+                // More intense animations
+                const birthdayTitle = document.querySelector('.birthday-title');
+                birthdayTitle.style.animation = 'bounce 1s infinite';
+                
+                // Play music if it's not already playing
+                if (birthdayMusic.paused) {
+                    birthdayMusic.play();
+                    musicToggle.querySelector('.music-icon').textContent = '🔊';
+                }
+                
+                // Add animation to the featured image
+                featuredImage.style.animation = 'bounce 3s infinite';
+                
+                // Add animation to the Vercel login image
+                vercelLoginContainer.style.animation = 'bounce 3s infinite alternate';
+            });
+            
+            // Vercel party button
+            vercelPartyBtn.addEventListener('click', () => {
+                // Make the Vercel image party
+                vercelLoginContainer.style.transform = 'rotate(5deg) scale(1.05)';
+                
+                // Add party elements
+                const partyElements = document.querySelectorAll('.party-element');
+                partyElements.forEach(element => {
+                    element.style.fontSize = '3rem';
+                    element.style.opacity = '1';
+                });
+                
+                // Create confetti around the Vercel image
+                createConfettiAround(vercelLoginContainer, 100);
+                
+                // Reset after animation
+                setTimeout(() => {
+                    vercelLoginContainer.style.transform = '';
+                    partyElements.forEach(element => {
+                        element.style.fontSize = '2rem';
+                    });
+                }, 3000);
+            });
+            
+            // Make featured image interactive
+            featuredImage.addEventListener('click', () => {
+                createConfetti(100);
+                featuredImage.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    featuredImage.style.transform = 'scale(1)';
+                }, 300);
+            });
+            
+            // Make Vercel login image interactive
+            vercelLoginContainer.addEventListener('click', () => {
+                createConfettiAround(vercelLoginContainer, 50);
+                vercelLoginContainer.style.transform = 'translateY(-8px) rotate(5deg)';
+                setTimeout(() => {
+                    vercelLoginContainer.style.transform = '';
+                }, 500);
+            });
+            
+            // Create confetti around an element
+            function createConfettiAround(element, count) {
+                const rect = element.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                
+                const colors = ['#ff66b2', '#ff99cc', '#ffb3d9', '#ffcce6', '#ff3399', 
+                                '#ffff99', '#99ff99', '#99ccff', '#cc99ff',
+                                '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff',
+                                '#ff00ff', '#ff9900', '#9900ff', '#009900', '#990000'];
+                
+                for (let i = 0; i < count; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    
+                    // Position around the element
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = Math.random() * 100 + 50;
+                    const x = centerX + Math.cos(angle) * distance;
+                    const y = centerY + Math.sin(angle) * distance;
+                    
+                    confetti.style.left = `${x}px`;
+                    confetti.style.top = `${y}px`;
+                    
+                    // Random color
+                    const colorIndex = Math.floor(Math.random() * colors.length);
+                    confetti.style.backgroundColor = colors[colorIndex];
+                    
+                    // Random size
+                    const size = 5 + Math.random() * 15;
+                    confetti.style.width = `${size}px`;
+                    confetti.style.height = `${size}px`;
+                    
+                    // Random shape
+                    const shapes = ['', '50%', '0%', '50% 0 50% 50%'];
+                    const shapeIndex = Math.floor(Math.random() * shapes.length);
+                    confetti.style.borderRadius = shapes[shapeIndex];
+                    
+                    // Random rotation
+                    const rotation = Math.random() * 360;
+                    confetti.style.transform = `rotate(${rotation}deg)`;
+                    
+                    // Animation
+                    const duration = 3 + Math.random() * 4;
+                    confetti.style.animation = `confettiFall ${duration}s linear forwards`;
+                    
+                    document.body.appendChild(confetti);
+                    
+                    // Remove confetti after animation completes
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, duration * 1000);
+                }
+            }
             
             // Create balloons function
             function createBalloons(count) {
-                const colors = ['#ff66b2', '#ff99cc', '#ffb3d9', '#ffcce6', '#ff3399'];
+                const colors = ['#ff66b2', '#ff99cc', '#ffb3d9', '#ffcce6', '#ff3399', 
+                               '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff', 
+                               '#ff00ff', '#ff9900', '#9900ff'];
                 
                 for (let i = 0; i < count; i++) {
                     const balloon = document.createElement('div');
@@ -527,7 +1092,9 @@
             // Create confetti function
             function createConfetti(count) {
                 const colors = ['#ff66b2', '#ff99cc', '#ffb3d9', '#ffcce6', '#ff3399', 
-                                '#ffff99', '#99ff99', '#99ccff', '#cc99ff'];
+                                '#ffff99', '#99ff99', '#99ccff', '#cc99ff',
+                                '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff',
+                                '#ff00ff', '#ff9900', '#9900ff', '#009900', '#990000'];
                 
                 for (let i = 0; i < count; i++) {
                     const confetti = document.createElement('div');
@@ -543,12 +1110,12 @@
                     confetti.style.backgroundColor = colors[colorIndex];
                     
                     // Random size
-                    const size = 5 + Math.random() * 10;
+                    const size = 5 + Math.random() * 15;
                     confetti.style.width = `${size}px`;
                     confetti.style.height = `${size}px`;
                     
                     // Random shape
-                    const shapes = ['', '50%'];
+                    const shapes = ['', '50%', '0%', '50% 0 50% 50%'];
                     const shapeIndex = Math.floor(Math.random() * shapes.length);
                     confetti.style.borderRadius = shapes[shapeIndex];
                     
@@ -566,6 +1133,95 @@
                     setTimeout(() => {
                         confetti.remove();
                     }, duration * 1000);
+                }
+            }
+            
+            // Create streamers function
+            function createStreamers(count) {
+                const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff',
+                               '#ff00ff', '#ff9900', '#9900ff', '#ff66b2', '#ff3399'];
+                
+                for (let i = 0; i < count; i++) {
+                    const streamer = document.createElement('div');
+                    streamer.className = 'streamer';
+                    
+                    // Random position
+                    const left = Math.random() * 100;
+                    streamer.style.left = `${left}%`;
+                    
+                    // Random color
+                    const colorIndex = Math.floor(Math.random() * colors.length);
+                    streamer.style.backgroundColor = colors[colorIndex];
+                    
+                    // Random length
+                    const length = 100 + Math.random() * 200;
+                    streamer.style.height = `${length}px`;
+                    
+                    // Random width
+                    const width = 3 + Math.random() * 5;
+                    streamer.style.width = `${width}px`;
+                    
+                    // Random rotation
+                    const rotation = -30 + Math.random() * 60;
+                    streamer.style.transform = `rotate(${rotation}deg)`;
+                    
+                    // Random animation duration
+                    const duration = 5 + Math.random() * 10;
+                    const fallDuration = 8 + Math.random() * 7;
+                    streamer.style.animation = `swing ${duration}s ease-in-out infinite, fall ${fallDuration}s linear forwards`;
+                    
+                    // Random delay
+                    const delay = Math.random() * 5;
+                    streamer.style.animationDelay = `0s, ${delay}s`;
+                    
+                    streamersContainer.appendChild(streamer);
+                    
+                    // Remove streamer after animation completes
+                    setTimeout(() => {
+                        streamer.remove();
+                    }, fallDuration * 1000 + delay * 1000);
+                }
+            }
+            
+            // Create background confetti
+            function createBackgroundConfetti(count) {
+                const colors = ['#ff66b2', '#ff99cc', '#ffb3d9', '#ffcce6', '#ff3399', 
+                                '#ffff99', '#99ff99', '#99ccff', '#cc99ff',
+                                '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff',
+                                '#ff00ff', '#ff9900', '#9900ff', '#009900', '#990000'];
+                
+                for (let i = 0; i < count; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    
+                    // Random position
+                    const left = Math.random() * 100;
+                    const top = Math.random() * 100;
+                    confetti.style.left = `${left}%`;
+                    confetti.style.top = `${top}%`;
+                    
+                    // Random color
+                    const colorIndex = Math.floor(Math.random() * colors.length);
+                    confetti.style.backgroundColor = colors[colorIndex];
+                    
+                    // Random size
+                    const size = 5 + Math.random() * 10;
+                    confetti.style.width = `${size}px`;
+                    confetti.style.height = `${size}px`;
+                    
+                    // Random shape
+                    const shapes = ['', '50%', '0%', '50% 0 50% 50%'];
+                    const shapeIndex = Math.floor(Math.random() * shapes.length);
+                    confetti.style.borderRadius = shapes[shapeIndex];
+                    
+                    // Random rotation
+                    const rotation = Math.random() * 360;
+                    confetti.style.transform = `rotate(${rotation}deg)`;
+                    
+                    // Fixed position
+                    confetti.style.position = 'absolute';
+                    
+                    bgConfettiContainer.appendChild(confetti);
                 }
             }
             
